@@ -1,0 +1,66 @@
+#NUC Info
+https://ark.intel.com/products/130393/Intel-NUC-Kit-NUC7i7DNHE
+https://downloadcenter.intel.com/product/130393/Intel-NUC-Kit-NUC7i7DNHE
+
+#Download latest ubuntu 18.04 server and install to usb, to get to boot menu, hold down power button when first booting until it turns orange, then immediately release
+# partition drive to 200gb and leave the remaining 32 GB for storage just in case we need to blow away install
+
+#Add Universal Repo and update
+sudo add-apt-repository universe
+sudo apt update && sudo apt dist-upgrade -y
+
+#install Aircrack to test WIFI
+sudo apt install aircrack-ng
+sudo airmon-ng start wlp1s0
+sudo airodump-ng wlp1s0mon
+sudo airmon-ng stop wlp1s0mon
+
+#VirtualBox installation
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian `lsb_release -cs` contrib"
+sudo apt-get update
+sudo apt-get install virtualbox-5.2
+wget -q https://download.virtualbox.org/virtualbox/5.2.22/Oracle_VM_VirtualBox_Extension_Pack-5.2.22.vbox-extpack
+sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.22.vbox-extpack && rm Oracle_VM_VirtualBox_Extension_Pack-5.2.22.vbox-extpack
+
+    #Signing VirtualBox if needed (keys should be backed up if not use openssl to gen new ones)
+        sudo -i
+        openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=John Doe/"
+        /usr/src/kernels/$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der $(modinfo -n vboxdrv)
+        mokutil --import MOK.der
+        reboot
+        
+        * Continue and confirm enrollment
+       * Enter the password used when registering the new keys with mokutil
+         reboot
+        modprobe vboxdrv #when machine comes backup login and do this
+
+#Import VM - copy it over from wherever it was stored and create an alias comands for controlling the vm
+vboxmanage import  kali_new.ova
+echo "alias kali='VBoxManage startvm kali-linux-2018.4 --type headless'">>~/.bashrc && source ~/.bashrc
+echo "alias kalisave='VBoxManage controlvm kali-linux-2018.4 savestate'">>~/.bashrc && source ~/.bashrc
+echo "alias kalisoft='vboxmanage controlvm kali-linux-2018.4 poweroff soft'">>~/.bashrc && source ~/.bashrc
+echo "alias kalipause='vboxmanage controlvm kali-linux-2018.4 pause'">>~/.bashrc && source ~/.bashrc
+echo "alias kaliresume='vboxmanage controlvm kali-linux-2018.4 resume'">>~/.bashrc && source ~/.bashrc
+echo "alias kalireset='vboxmanage controlvm kali-linux-2018.4 reset'">>~/.bashrc && source ~/.bashrc
+echo "alias kaliacpi='vboxmanage controlvm kali-linux-2018.4 acpipowerbutton'">>~/.bashrc && source ~/.bashrc
+echo "alias kalipoweroff='vboxmanage controlvm kali-linux-2018.4 poweroff'">>~/.bashrc && source ~/.bashrc
+echo "alias kalipoweroff='vboxmanage controlvm kali-linux-2018.4 poweroff'">>~/.bashrc && source ~/.bashrc
+echo "alias kalisnapshot='vboxmanage snapshot kali-linux-2018.4 take snap-before-client'">>~/.bashrc && source ~/.bashrc
+echo "alias kalirevert='vboxmanage snapshot kali-linux-2018.4 restore snap-before-client'">>~/.bashrc && source ~/.bashrc
+source ~/.bashrc
+
+#vbox create RDP user
+VBoxManage modifyvm  kali-linux-2018.4 --vrde on
+VBoxManage showvminfo kali-linux-2018.4 | grep VRDE
+VBoxManage modifyvm kali-linux-2018.4 --vrdeauthtype external
+##change username /password and hash for example only##
+VBoxManage internalcommands passwordhash "password"
+VBoxManage setextradata "kali-linux-2018.4" "VBoxAuthSimple/users/<username>"  9029343c093eb26fdd5883de927853ec5a8e223d0d6de21c7a8b14bc7c9b39
+
+#connect with RDP client on 3389 (save credentials  on rdp on windows or it wont connect, mac rdp seems fine)
+
+
+#vbox alias to start kali
+kali
