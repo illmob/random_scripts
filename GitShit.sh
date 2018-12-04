@@ -48,7 +48,9 @@ git clone https://github.com/rebootuser/LinEnum.git
 tar -C /opt/unix-privesc-check -czf /opt/unix-privesc-check/upc2.tar.gz unix-privesc-check2 
 
 #mimikatz
-mimikatz=$(curl -sL https://github.com/gentilkiwi/mimikatz/releases/latest | grep -i /mimikatz_trunk.zip| sed -n 's/.*href="\([^"]*\).*/\1/p')&& wget https://github.com$mimikatz &&  unzip -o mimikatz_trunk.zip -d /opt/mimikatz && unset mimikatz
+mimikatz=$(curl -sL https://github.com/gentilkiwi/mimikatz/releases/latest | grep -i /mimikatz_trunk.zip| sed -n 's/.*href="\([^"]*\).*/\1/p')&& wget -T 5 https://github.com$mimikatz &&  unzip -o mimikatz_trunk.zip -d /opt/mimikatz && unset mimikatz && rm mimikatz_trunk.zip
+
+
 
 
 #Optional Installs
