@@ -26,8 +26,8 @@ sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.22.vbox-
 
     #Signing VirtualBox if needed (keys should be backed up if not use openssl to gen new ones)
         sudo -i
-        openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=John Doe/"
-        /usr/src/kernels/$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der $(modinfo -n vboxdrv)
+        openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=VBox Secure/"
+        sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der $(modinfo -n vboxdrv)
         mokutil --import MOK.der
         reboot
         
