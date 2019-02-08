@@ -1,8 +1,8 @@
 #Collection of awesome shit to grab on an initial kali rollout on AWS
 
 #update
-apt get update && apt-get dist-upgrade -y
-apt autoremove -y && apt clean
+#apt get update && apt-get dist-upgrade -y
+#apt autoremove -y && apt clean
 
 #Disable Lockscreen & Screen Blanking
 gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true' && gsettings set org.gnome.desktop.session idle-delay 0
