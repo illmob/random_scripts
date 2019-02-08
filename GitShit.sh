@@ -56,11 +56,11 @@ mimikatz=$(curl -sL https://github.com/gentilkiwi/mimikatz/releases/latest | gre
 #Optional Installs
 
 #Powershell
-apt update && apt -y install curl gnupg apt-transport-https
-curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/powershell.list
-apt update
-apt -y install powershell #running pwsh will start up PowerShell, then run: Update-Help
+#apt update && apt -y install curl gnupg apt-transport-https
+#curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+#echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/powershell.list
+#apt update
+#apt -y install powershell #running pwsh will start up PowerShell, then run: Update-Help
 
 #sublime
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
