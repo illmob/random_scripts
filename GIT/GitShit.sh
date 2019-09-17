@@ -27,6 +27,8 @@ printf '============================================================\n\n'
 gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
 gsettings set org.gnome.desktop.session idle-delay 0
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+#Do this just in case the other shit doesnt work
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 printf '\n============================================================\n'
 printf '[+] Turn off Dash to Dock Intelligent Autohide\n'
@@ -46,14 +48,11 @@ git clone https://github.com/danielmiessler/SecLists.git
 git clone https://github.com/xillwillx/skiptracer.git && cd skiptracer && pip install -r requirements.txt && cd ..
 git clone https://github.com/DominicBreuker/pspy.git
 git clone https://github.com/swisskyrepo/PayloadsAllTheThings.git
-
-
 git clone https://github.com/trustedsec/unicorn.git
 git clone https://github.com/oddcod3/Phantom-Evasion.git
 
 #shells
 git clone https://github.com/byt3bl33d3r/SILENTTRINITY.git
-git clone https://github.com/EmpireProject/Empire.git && cd Empire &&  ./setup/install.sh && cd ..
 git clone https://github.com/lesnuages/hershell.git
 git clone https://github.com/mthbernardes/rsg.git
 git clone https://github.com/0x00-0x00/ShellPop.git && apt install python-argcomplete && cd ShellPop && pip install -r requirements.txt && python setup.py install && cd ..
@@ -109,10 +108,7 @@ printf '[+] Installing Alfa Drivers,golang +env, gnome-screenshot\n'
 printf '[+] pip + env, patator, zmap, chromium, crackmapexec\n'
 printf '============================================================\n\n'
 apt-get -y install \
-    realtek-rtl88xxau-dkms \
     golang \
-    gnome-screenshot \
-    terminator \
     python-pip \
     python3-dev \
     python3-pip \
@@ -133,6 +129,28 @@ grep -q -F "$path_exp" "$HOME/.profile" || echo $path_exp | tee -a "$HOME/.profi
 . "$HOME/.profile"
 sed -i 's#Exec=/usr/bin/chromium %U#Exec=/usr/bin/chromium --no-sandbox %U#g' /usr/share/applications/chromium.desktop
 
+printf '\n============================================================\n'
+printf '[+] Initializing Metasploit Database\n'
+printf '============================================================\n\n'
+systemctl start postgresql
+systemctl enable postgresql
+msfdb init
+
+printf '\n============================================================\n'
+printf '[+] Finalize.\n'
+printf '============================================================\n\n
+updatedb
+rmdir ~/Music ~/Public ~/Videos ~/Templates &>/dev/null
+
+/* Optional Installs
+printf '\n============================================================\n'
+printf '[+] Installing Sublime Text\n'
+printf '============================================================\n\n
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+apt install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+apt update
+apt install sublime-text
 
 printf '\n============================================================\n'
 printf '[+] Installing Bloodhound\n'
@@ -144,34 +162,6 @@ grep 'NEO4J_ULIMIT_NOFILE=60000' /etc/default/neo4j 2>/dev/null || echo 'NEO4J_U
 apt-get install -y bloodhound
 neo4j start
 
-printf '\n============================================================\n'
-printf '[+] Initializing Metasploit Database\n'
-printf '============================================================\n\n'
-systemctl start postgresql
-systemctl enable postgresql
-msfdb init
-
-printf '\n============================================================\n'
-printf '[+] Installing Sublime Text\n'
-printf '============================================================\n\n
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-apt install apt-transport-https
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-apt update
-apt install sublime-text
-
-printf '\n============================================================\n'
-printf '[+] Finalize.\n'
-printf '============================================================\n\n
-updatedb
-rmdir ~/Music ~/Public ~/Videos ~/Templates &>/dev/null
-
-
-#Optional Installs
-
-#Powershell
-#apt update && apt -y install curl gnupg apt-transport-https
-#curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-#echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/powershell.list
-#apt update
-#apt -y install powershell #running pwsh will start up PowerShell, then run: Update-Help
+cd /opt
+git clone https://github.com/EmpireProject/Empire.git && cd Empire &&  ./setup/install.sh && cd ..
+*/
