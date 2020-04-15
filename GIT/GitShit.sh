@@ -1,7 +1,7 @@
 #!/bin/bash
 #Collection of awesome shit to grab on an initial kali rollout
 printf '\n============================================================\n'
-printf '[+] Fx root colors\n'
+printf '[+] Fix root colors\n'
 printf '============================================================\n\n' 
 echo "PS1='\[\033[1;31m\]\u@\h\[\033[1;34m\]\w:\[\033[0;37m\]\\$'" >> \root\.bashrc
 source ~/.bashrc
@@ -35,6 +35,7 @@ printf '============================================================\n\n'
 pip install shodan
 git clone https://github.com/xillwillx/skiptracer.git && cd skiptracer && pip install -r requirements.txt && cd ..
 git clone https://github.com/pry0cc/Doh365.git
+git clone https://github.com/vysecurity/LinkedInt.git
 
 printf '\n============================================================\n'
 printf '[+] Install Wordlists\n'
@@ -53,6 +54,8 @@ git clone https://github.com/phackt/stager.dll.git
 git clone https://github.com/infosecn1nja/MaliciousMacroMSBuild.git
 git clone https://github.com/GreatSCT/GreatSCT.git
 git clone https://github.com/frohoff/ysoserial.git
+git clone https://github.com/mdsecactivebreach/CACTUSTORCH.git
+cd CACTUSTORCH && wget https://raw.githubusercontent.com/xillwillx/CACTUSTORCH_DDEAUTO/master/cactus.sh cd ..
 
 printf '\n============================================================\n'
 printf '[+] Install Network Discovery Tools\n'
@@ -97,6 +100,7 @@ git clone https://github.com/outflanknl/Dumpert.git
 git clone https://github.com/xFreed0m/RDPassSpray.git
 git clone https://github.com/realoriginal/ppdump-public.git
 git clone https://github.com/hoangprod/AndrewSpecial.git
+git clone https://github.com/eladshamir/Internal-Monologue.git
 
 printf '\n============================================================\n'
 printf '[+] Install Extra Scripts\n'
@@ -113,8 +117,13 @@ wget https://github.com/d0nkeys/redteam/raw/master/lateral-movement/Run-As.ps1
 wget https://raw.githubusercontent.com/itm4n/PrivescCheck/master/Invoke-PrivescCheck.ps1
 wget https://github.com/Mr-Un1k0d3r/PoisonHandler/raw/master/Execute-PoisonHandler.ps1
 wget https://raw.githubusercontent.com/dafthack/DomainPasswordSpray/master/DomainPasswordSpray.ps1
+wget https://raw.githubusercontent.com/Arvanaghi/SessionGopher/master/SessionGopher.ps1
+git clone  https://github.com/S3cur3Th1sSh1t/PowerSharpPack.git
 mkdir /opt/csharp && cd /opt/csharp
 wget https://github.com/cobbr/SharpSploit/archive/v1.5.zip && unzip v1.5.zip && rm v1.5.zip
+git clone https://github.com/vysecurity/LinkedInt.git
+mkdir /opt/compiled && /opt/compiled
+wget https://github.com/AlessandroZ/LaZagne/releases/download/2.4.3/lazagne.exe
 
 printf '\n============================================================\n'
 printf '[+] Install Lateral Movement Tools\n'
@@ -122,6 +131,7 @@ printf '============================================================\n\n'
 gem install evil-winrm
 cd /opt
 git clone https://github.com/Mr-Un1k0d3r/SCShell.git
+git clone https://github.com/NetSPI/PowerUpSQL.git
 
 printf '\n============================================================\n'
 printf '[+] Install Pivoting Tools\n'
@@ -130,6 +140,7 @@ git clone https://github.com/jpillora/chisel.git
 git clone https://github.com/sshuttle/sshuttle.git && cd sshuttle && ./setup.py install && cd ..
 git clone https://github.com/klsecservices/rpivot.git
 git clone https://github.com/sensepost/reGeorg.git
+git clone https://github.com/SECFORCE/Tunna.git
 
 printf '\n============================================================\n'
 printf '[+] Install Wireless Tools\n'
