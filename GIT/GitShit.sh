@@ -100,11 +100,11 @@ git clone https://github.com/hoangprod/AndrewSpecial.git
 printf '\n============================================================\n'
 printf '[+] Install Extra Scripts\n'
 printf '============================================================\n\n'
-mkdir ~/scripts && cd ~/scripts
+mkdir /opt/scripts && cd /opt/scripts
 wget https://raw.githubusercontent.com/superkojiman/onetwopunch/master/onetwopunch.sh
 wget https://github.com/d0nkeys/redteam/raw/master/scanners/nmap/scan.sh
 wget https://github.com/d0nkeys/redteam/raw/master/scanners/nmap/scan.parallel.sh
-mkdir ~/powershell && cd ~/powershell
+mkdir /opt/powershell && cd /opt/powershell
 wget https://raw.githubusercontent.com/peewpw/Invoke-WCMDump/master/Invoke-WCMDump.ps1
 wget https://github.com/d0nkeys/redteam/raw/master/privilege-escalation/JuicyPotato.ps1
 wget https://github.com/d0nkeys/redteam/raw/master/privilege-escalation/JuicyPotato32.ps1
@@ -112,7 +112,7 @@ wget https://github.com/d0nkeys/redteam/raw/master/lateral-movement/Run-As.ps1
 wget https://raw.githubusercontent.com/itm4n/PrivescCheck/master/Invoke-PrivescCheck.ps1
 wget https://github.com/Mr-Un1k0d3r/PoisonHandler/raw/master/Execute-PoisonHandler.ps1
 wget https://raw.githubusercontent.com/dafthack/DomainPasswordSpray/master/DomainPasswordSpray.ps1
-mkdir ~/csharp && cd ~/csharp
+mkdir /opt/csharp && cd /opt/csharp
 wget https://github.com/cobbr/SharpSploit/archive/v1.5.zip && unzip v1.5.zip && rm v1.5.zip
 
 printf '\n============================================================\n'
