@@ -52,6 +52,7 @@ git clone https://github.com/danielbohannon/Invoke-Obfuscation.git
 git clone https://github.com/phackt/stager.dll.git
 git clone https://github.com/infosecn1nja/MaliciousMacroMSBuild.git
 git clone https://github.com/GreatSCT/GreatSCT.git
+git clone https://github.com/frohoff/ysoserial.git
 
 printf '\n============================================================\n'
 printf '[+] Install Network Discovery Tools\n'
@@ -121,6 +122,14 @@ printf '============================================================\n\n'
 gem install evil-winrm
 cd /opt
 git clone https://github.com/Mr-Un1k0d3r/SCShell.git
+
+printf '\n============================================================\n'
+printf '[+] Install Pivoting Tools\n'
+printf '============================================================\n\n'
+git clone https://github.com/jpillora/chisel.git
+git clone https://github.com/sshuttle/sshuttle.git && cd sshuttle && ./setup.py install && cd ..
+git clone https://github.com/klsecservices/rpivot.git
+git clone https://github.com/sensepost/reGeorg.git
 
 printf '\n============================================================\n'
 printf '[+] Install Wireless Tools\n'
