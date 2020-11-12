@@ -18,13 +18,14 @@ printf '\n============================================================\n'
 printf '[+] Change Default SSH Keys\n'
 printf '============================================================\n\n'
 apt install ssh -y
-service ssh start
+systemctl enable ssh.service
 update-rc.d -f ssh remove
 update-rc.d -f ssh defaults
 mkdir /etc/ssh/backup-keys
 mv /etc/ssh/ssh_host_* /etc/ssh/backup-keys
 dpkg-reconfigure openssh-server
-service ssh restart
+systemctl start ssh.service
+
 
 printf '\n============================================================\n'
 printf '[+] Add support for 32bit stuff\n'
