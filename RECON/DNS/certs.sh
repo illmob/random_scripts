@@ -39,8 +39,12 @@ hackertarget=`enum_hackertarget $url`
 echo -e "│      └── [\e[92m+\e[0m] \e[37malienvault.com\e[0m"
 enum_alienvault(){ curl -s "https://otx.alienvault.com/api/v1/indicators/domain/$url/passive_dns" | grep -o -E "[a-zA-Z0-9._-]+\.$url";}
 alienvault=`enum_alienvault $url`
+echo -e "│      └── [\e[92m+\e[0m] \e[37mjldc.me\e[0m"
+enum_anubis(){curl -s "[https://jldc.me/anubis/subdomains/$1](https://jldc.me/anubis/subdomains/$1)" | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | anew}
+anubis =`enum_anubis $url`
+# needs https://github.com/tomnomnom/anew
 
 # sort and unique and lowercase the results and spit it out to a file
-echo -e $crtsh $certspotter $hackertarget $alienvault | tr -s " " "\n" | tr '[:upper:]' '[:lower:]' |sort -u -o subdomains.txt
+echo -e $crtsh $certspotter $hackertarget $alienvault $anubis | tr -s " " "\n" | tr '[:upper:]' '[:lower:]' |sort -u -o subdomains.txt
 echo -e "└── [\e[92m+\e[0m] Complete. Results in \e[93msubdomains.txt\e[0m"
 echo -e "└── [\e[92m*\e[0m] Found \e[93m$(wc -l<subdomains.txt)\e[0m subdomains.\n"
